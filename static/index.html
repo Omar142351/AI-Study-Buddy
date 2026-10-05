@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Study Buddy</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="hero">
+    <h1>AI Study Buddy</h1>
+    <p>Type anything you want to learn. Get an explanation, examples, a quiz or study notes.</p>
+  </header>
+
+  <main>
+    <!--
+      WEEK 2 - build the form. style.css already styles these class names and the
+      app.js starter already looks up these ids, so keep them EXACTLY as written.
+    -->
+    <form id="study-form" novalidate>
+      <!-- TODO(W2-1a): the topic field with a live counter.
+           <div class="field">
+             <label for="topic">What do you want to learn?</label>
+             <input id="topic" name="topic" type="text" maxlength="200" autocomplete="off"
+                    placeholder="e.g. Neural networks" required>
+             <span class="counter" id="topic-count">0 / 200</span>
+           </div>
+      -->
+
+      <!-- TODO(W2-1b): the 4 mode choices. Use this pattern once per mode (copy 4 times):
+           <fieldset class="modes">
+             <legend>How should I help?</legend>
+             <label class="mode"><input type="radio" name="mode" value="explain" checked>
+               <span><strong>Explain</strong><small>Simple words and an example</small></span></label>
+             ... values: explain | example | quiz | summarize
+           </fieldset>
+      -->
+
+      <!-- TODO(W2-1c): a line of help text that changes with the mode.
+           <p class="hint" id="mode-hint"></p>
+      -->
+
+      <button id="submit-btn" type="submit">Ask Study Buddy</button>
+    </form>
+
+    <!-- Where problems are shown. role="alert" makes screen readers announce it. -->
+    <p id="error" class="error" role="alert" hidden></p>
+
+    <!-- TODO(W2-1d): the result card. aria-live="polite" announces new results to screen readers.
+         <section id="result" class="card" aria-live="polite" hidden>
+           <p class="eyebrow-small" id="result-mode"></p>
+           <h2 id="result-title"></h2>
+           <p id="result-answer" class="answer-text"></p>
+           <div id="points-block">
+             <h3>Key points</h3>
+             <ul id="result-points"></ul>
+           </div>
+         </section>
+    -->
+  </main>
+
+  <footer>Built in the AI Engineering course. Your text is sent to an AI model; don't share private information. AI can make mistakes, so double-check important facts.</footer>
+  <script src="/static/app.js"></script>
+</body>
+</html>

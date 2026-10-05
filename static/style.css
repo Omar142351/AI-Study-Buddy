@@ -1,0 +1,121 @@
+/* Provided in full: design is not the learning goal. Feel free to restyle it in Week 4! */
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #1c2333;
+  --muted: #5d667a;
+  --primary: #3b5bdb;
+  --primary-hover: #2f4ac0;
+  --border: #d9deea;
+  --error-bg: #fdecec;
+  --error-text: #a12626;
+  --good: #1b7f4b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12151d;
+    --card: #1b2030;
+    --text: #e8ecf6;
+    --muted: #9aa4bd;
+    --primary: #6f8cff;
+    --primary-hover: #8aa1ff;
+    --border: #2d3550;
+    --error-bg: #3a1c1f;
+    --error-text: #ff9a9a;
+    --good: #55d192;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+}
+
+.hero { text-align: center; padding: 40px 16px 8px; }
+.hero h1 { margin: 0 0 6px; font-size: clamp(1.8rem, 5vw, 2.6rem); }
+.hero p { margin: 0 auto; max-width: 520px; color: var(--muted); }
+
+main { max-width: 680px; margin: 0 auto; padding: 24px 16px 40px; }
+
+form, .card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.field { margin-bottom: 18px; }
+label, legend { display: block; font-weight: 600; margin-bottom: 6px; }
+.optional { font-weight: 400; color: var(--muted); }
+
+input[type="text"], textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+textarea { resize: vertical; }
+input:focus-visible, textarea:focus-visible, button:focus-visible,
+.mode:has(input:focus-visible) {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.counter { display: block; text-align: right; font-size: 0.8rem; color: var(--muted); }
+
+.modes { border: 0; padding: 0; margin: 0 0 18px; display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+.modes legend { grid-column: 1 / -1; }
+.mode {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 12px; margin: 0; font-weight: 400; cursor: pointer;
+  border: 1px solid var(--border); border-radius: 10px; background: var(--bg);
+}
+.mode:has(input:checked) { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary); }
+.mode small { display: block; color: var(--muted); }
+@media (max-width: 520px) { .modes { grid-template-columns: 1fr; } }
+
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  font: inherit; font-weight: 700;
+  color: #fff; background: var(--primary);
+  border: 0; border-radius: 10px; cursor: pointer;
+}
+button[type="submit"]:hover:not(:disabled) { background: var(--primary-hover); }
+button:disabled { opacity: 0.6; cursor: wait; }
+
+.error {
+  margin: 16px 0 0; padding: 12px 14px;
+  background: var(--error-bg); color: var(--error-text);
+  border-radius: 10px; font-weight: 600;
+}
+
+.card { margin-top: 20px; }
+.result-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.result-head h2 { margin: 0; font-size: 1.3rem; }
+.badge { padding: 4px 12px; border-radius: 999px; font-weight: 800; color: var(--good); border: 2px solid var(--good); }
+.answer-text { white-space: pre-wrap; }
+.card h3, .history h3 { margin-bottom: 6px; font-size: 1rem; }
+
+.history { margin-top: 20px; }
+.chip {
+  margin: 0 8px 8px 0; padding: 6px 12px; font: inherit; font-size: 0.9rem;
+  color: var(--text); background: var(--card);
+  border: 1px solid var(--border); border-radius: 999px; cursor: pointer;
+}
+.chip:hover { border-color: var(--primary); }
+
+footer { text-align: center; color: var(--muted); font-size: 0.85rem; padding: 0 16px 32px; }
+
+/* Study Buddy extras */
+.hint { margin: -6px 0 18px; color: var(--muted); font-size: 0.95rem; }
+.eyebrow-small { margin: 0 0 4px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--primary); }
