@@ -45,6 +45,13 @@ if config.ALLOWED_ORIGINS:
 # TODO(W1-2): GET /health  ->  {"status": "ok", "ai_mode": config.ai_mode()}
 #   Hint: @app.get("/health") above an async def.
 
+@app.get("/health")
+def health():
+    return{
+        "status": "ok",
+        "ai_mode": config.ai_mode()
+    }
+
 
 # TODO(W1-3): POST /api/study
 #   - takes a StudyRequest, returns a StudyResponse   (@app.post(..., response_model=StudyResponse))
