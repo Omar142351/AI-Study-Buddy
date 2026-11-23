@@ -53,7 +53,8 @@ function clearError() {
 //   disable the submit button while waiting and change its text to "Thinking...";
 //   restore BUTTON_TEXT and enable it again when done.
 function setLoading(isLoading) {
-  // your code
+  submitBtn.disabled = isLoading
+  submitBtn.textContent = isLoading ? "Thinking.." : BUTTON_TEXT
 }
 
 // TODO(W2-3): updateHint()
@@ -61,12 +62,19 @@ function setLoading(isLoading) {
 //   Call it when a mode radio changes AND once when the page loads (last line of this file).
 //   Hint: form.querySelectorAll('input[name="mode"]').forEach(radio => radio.addEventListener("change", ...))
 function updateHint() {
-  // your code
+  modeHint.textContent = MODE_HINTS[currentMode()]
 }
 
+form.querySelectorAll('input[name="mode"]').forEach(input => {
+  input.addEventListener("change", updateHint)
+})
 // TODO(W2-4): live character counter
 //   When the user types in topicInput, set topicCount.textContent to e.g. "12 / 200".
 //   Hint: topicInput.addEventListener("input", ...) and topicInput.maxLength
+topicInput.addEventListener("input", ()=> {
+  const length = topicInput.value.length
+  topicCount.textContent = `${length} / ${topicInput.maxLength}`
+})
 
 // TODO(W2-5): renderResult(data)
 //   data looks like {topic, mode, title, answer, key_points: [...]}
@@ -75,9 +83,71 @@ function updateHint() {
 //   - key points: create one <li> per point inside pointsEl (document.createElement + replaceChildren)
 //   - hide pointsBlock when there are no key points (quiz mode has none)
 //   - finally show resultBox (resultBox.hidden = false)
+// ---------- render the response ----------
 function renderResult(data) {
-  // your code
+  // textContent (not innerHTML) => AI text can never inject HTML or scripts.
+  modeEl.textContent = MODE_LABELS[data.mode] + " · " + data.topic;
+  titleEl.textContent = data.title;
+  answerEl.textContent = data.answer;
+ 
+  pointsEl.replaceChildren(
+    ...data.key_points.map((point) => {
+      const li = document.createElement("li");
+      li.textContent = point;
+      return li;
+    })
+  );
+  pointsBlock.hidden = data.key_points.length === 0; // quiz mode has none
+ 
+  resultBox.hidden = false;
+  resultBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault()
+  clearError()
+  let payload = {
+    topic: topicInput.value,
+    mode: currentMode()
+  }
+
+  if(!payload.topic){
+    showError("Please type a topic first.")
+    return
+  }
+
+  if(!payload.mode){
+    showError("Please select a mode first.")
+    return
+  }
+
+  setLoading(true)
+
+  try{
+    const response = await fetch("/api/study",{
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    const data = await response.json()
+    console.log(data)
+    renderResult(data)
+  }catch(error){
+    if (error instanceof TypeError) {
+      showError(
+        "Can't reach the server. Please check your internet connection.",
+      );
+    } else {
+      showError(error. Message);
+    }
+  }finally{
+    setLoading(false)
+  }
+})
+
+
 
 // TODO(W2-6): the submit handler
 //   form.addEventListener("submit", async (event) => { ... })

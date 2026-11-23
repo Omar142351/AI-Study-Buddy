@@ -11,6 +11,7 @@ Mode = Literal["explain", "example", "quiz", "summarize"]
 
 class StudyRequest(BaseModel):
     mode: Mode
+    topic: str = Field(min_length=1, max_length=200)
 
     # TODO(W1-1a): add the topic field
     #   topic: str, at least 1 and at most 200 characters

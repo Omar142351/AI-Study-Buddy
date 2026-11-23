@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+      <html>
+        <head>
+          <title>Course Feedback</title>
+          <link rel="stylesheet" href="/static/style.css" />
+        </head>
+        <body>
+         <h1>Course Feedback</h1>
+         <p>Tell us how today's session went. It only takes a minute!</p>
+         <form>
+          <label for="student-name">Your name:</label>
+          <input id="student-name" type="text" name="student-name">
+          <fieldset class = "modes">
+            <legend> How was today's session? </legend>
+            
+            <label for="easy" class = "mode">
+                <input id="easy" type="radio" name="difficulty" value="easy">
+                Easy
+            </label>
+            
+            <label for="just-right" class = "mode">
+                <input id="just-right" type="radio" name="difficulty" value="just-right" checked>
+                Just right
+            </label>
+
+            <label for="too-hard" class = "mode">
+                <input id="too-hard" type="radio" name="difficulty" value="too-hard">
+                Too hard
+            </label>
+          </fieldset>
+          <button type="submit">Send feedback</button>
+        </form>
+        <section hidden>
+          <h2>What I liked</h2>
+          <ul>
+            <li>The examples were clear</li>
+            <li>We got to practice</li>
+            <li>The pace was good</li>
+          </ul>
+        </section>
+        </body>
+        </html>

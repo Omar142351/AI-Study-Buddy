@@ -52,13 +52,27 @@ def health():
         "ai_mode": config.ai_mode()
     }
 
+#hw assignment
+@app.get("/modes")
+def modes():
+    return{
+        "modes": [
+            { "value": "explain", "label": "Explain", "description": "Simple words and an example"},
+            { "value": "example", "label": "Examples", "description": "Analogies from everyday life"},
+            { "value": "quiz", "label": "Quiz", "description": "Test your understanding"},
+            { "value": "summarize", "label": "summarize", "description": "Get the key points"}
+        ]
+    }
 
 # TODO(W1-3): POST /api/study
 #   - takes a StudyRequest, returns a StudyResponse   (@app.post(..., response_model=StudyResponse))
 #   - call:  result = await ai_service.study(payload)
 #   - return StudyResponse(topic=payload.topic, mode=payload.mode, **result.model_dump())
 #   Keep it thin: validate -> call service -> shape response.
-
+@app.post("/api/study", response_model = StudyResponse)
+async def study(payload: StudyRequest):
+    result = await ai_service.study(payload)
+    return StudyResponse(topic=payload.topic, mode = payload.mode, **result.model_dump())
 
 # TODO(W1-4): make validation errors friendly.
 #   Right now FastAPI answers bad input with 422 and a long list. We want:

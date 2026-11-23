@@ -18,6 +18,45 @@
       app.js starter already looks up these ids, so keep them EXACTLY as written.
     -->
     <form id="study-form" novalidate>
+      <div>
+        <label for = "topic"> What do you want to learn? </label>
+        <input type="text" name="topic" id="topic" maxlength="200">
+        <span class="counter" id="topic-count">
+          0/200
+        </span>
+      </div>
+      <fieldset class="modes">
+        <legend> How should I help? </legend>
+        <label class="mode">
+          <input type="radio" value="explain" name="mode">
+          <span>
+            <strong> Explain </strong>
+            <small> Simple words and an example. </small>
+          </span>
+        </label>
+        <label class="mode">
+          <input type="radio" value="quiz" name="mode">
+          <span>
+            <strong> Quiz </strong>
+            <small> 3 multiple choice questions. </small>
+          </span>
+        </label>
+        <label class="mode">
+            <input type="radio" value="summarize" name="mode" />
+            <span>
+              <strong>Summarize</strong>
+              <small>Quick study notes</small>
+            </span>
+          </label>
+ 
+          <label class="mode">
+            <input type="radio" value="example" name="mode" />
+            <span>
+              <strong>Examples</strong>
+              <small>Analogies from everyday life</small>
+            </span>
+          </label>
+      </fieldset>
       <!-- TODO(W2-1a): the topic field with a live counter.
            <div class="field">
              <label for="topic">What do you want to learn?</label>
@@ -36,9 +75,9 @@
            </fieldset>
       -->
 
-      <!-- TODO(W2-1c): a line of help text that changes with the mode.
+      <!-- TODO(W2-1c): a line of help text that changes with the mode. -->
            <p class="hint" id="mode-hint"></p>
-      -->
+     
 
       <button id="submit-btn" type="submit">Ask Study Buddy</button>
     </form>
@@ -46,7 +85,7 @@
     <!-- Where problems are shown. role="alert" makes screen readers announce it. -->
     <p id="error" class="error" role="alert" hidden></p>
 
-    <!-- TODO(W2-1d): the result card. aria-live="polite" announces new results to screen readers.
+    <!-- TODO(W2-1d): the result card. aria-live="polite" announces new results to screen readers. -->
          <section id="result" class="card" aria-live="polite" hidden>
            <p class="eyebrow-small" id="result-mode"></p>
            <h2 id="result-title"></h2>
@@ -56,7 +95,7 @@
              <ul id="result-points"></ul>
            </div>
          </section>
-    -->
+   
   </main>
 
   <footer>Built in the AI Engineering course. Your text is sent to an AI model; don't share private information. AI can make mistakes, so double-check important facts.</footer>
